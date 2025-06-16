@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Template Test</title>
+</head>
+<body>
+    <h1>Template Test Page</h1>
+    <p>Testing if templates are accessible:</p>
+    <ul>
+        <li><a href="/templates/raiffeisen_template.csv" download>Raiffeisenbank Template</a></li>
+        <li><a href="/templates/fio_template.csv" download>FIO Bank Template</a></li>
+    </ul>
+    
+    <script>
+        // Test template accessibility
+        fetch('/templates/raiffeisen_template.csv')
+            .then(response => response.text())
+            .then(data => {
+                console.log('Raiffeisenbank template loaded:', data.substring(0, 100));
+                document.getElementById('raiff-status').textContent = '✅ Accessible';
+            })
+            .catch(err => {
+                console.error('Raiffeisenbank template error:', err);
+                document.getElementById('raiff-status').textContent = '❌ Error';
+            });
+            
+        fetch('/templates/fio_template.csv')
+            .then(response => response.text())
+            .then(data => {
+                console.log('FIO template loaded:', data.substring(0, 100));
+                document.getElementById('fio-status').textContent = '✅ Accessible';
+            })
+            .catch(err => {
+                console.error('FIO template error:', err);
+                document.getElementById('fio-status').textContent = '❌ Error';
+            });
+    </script>
+    
+    <h2>Template Status</h2>
+    <p>Raiffeisenbank Template: <span id="raiff-status">Testing...</span></p>
+    <p>FIO Template: <span id="fio-status">Testing...</span></p>
+</body>
+</html>
